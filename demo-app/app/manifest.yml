@@ -1,0 +1,4 @@
+applications:
+  - name: dogs
+    memory: 64M
+
