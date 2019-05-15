@@ -9,6 +9,7 @@
     "rollup-plugin-commonjs": "^9.3.4",
     "rollup-plugin-livereload": "^1.0.0",
     "rollup-plugin-node-resolve": "^4.2.3",
+    "rollup-plugin-replace": "^2.2.0",
     "rollup-plugin-svelte": "^5.0.3",
     "rollup-plugin-terser": "^4.0.4",
     "sirv-cli": "^0.4.0",
@@ -19,7 +20,8 @@
     "autobuild": "rollup -c -w",
     "dev": "run-p start:dev autobuild",
     "start": "sirv public",
-    "start:dev": "sirv public --dev"
+    "start:dev": "sirv public --dev -s",
+    "css-build": "node-sass --omit-source-map-url sass/styles.scss > public/styles.css"
   },
   "dependencies": {
     "ramda": "^0.26.1",
