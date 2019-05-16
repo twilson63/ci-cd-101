@@ -1,14 +1,18 @@
 <script>
-  let dogs = [{
-    name: 'Wilbur',
-    breed: 'Terrier-Russell',
-    avatar: 'https://images.dog.ceo/breeds/terrier-russell/jack2.jpg'
-  }]
+  import { getContext, onMount } from 'svelte'
+
+  const store = getContext('store')
+  const action = getContext('action')
+
+  $: dogs = $store.dogs
+
+  onMount(() => {
+    action('doFetchDogs')()
+  })
 </script>
 <h1>TRHC Dogs</h1>
 
 <a href="/dogs/new">Add Dog</a>
-
 {#each dogs as dog}
 <div>
   <h3>{dog.name}</h3>

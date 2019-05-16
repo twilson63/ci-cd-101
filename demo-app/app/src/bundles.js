@@ -11,7 +11,7 @@ const routes = createRouteBundle({
   '/dogs/new': Form
 })
 
-export default composeBundles(app, dogs, routes)
+export default composeBundles(app(), dogs, routes)
 
 
 function app() {
@@ -21,6 +21,7 @@ function app() {
       headers: { 'content-type': 'application/json', authorization: `Bearer ${token}` }
     }
     if (body) { options.body = JSON.stringify(body) }
+    console.log(process.env.API)
     return fetch(process.env.API + path, options)
       .then(res => res.json())
       .catch(err => ({ error: err.message}))

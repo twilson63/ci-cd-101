@@ -8,7 +8,11 @@ export default {
   doPostDog(dog) {
     return async ({dispatch, api }) => {
       dispatch({type: POST_DOG_STARTED})
-      const result = await api.post('/dogs')
+      const result = await api.post('/dogs', dog)
+      if (result.error) {
+        dispatch({type: POST_DOG_ERROR, payload: result.error})
+        return Promise.resolve(false)
+      }
       // handle error 
       dispatch({type: POST_DOG_SUCCESS, payload: result})
       return Promise.resolve(true)
@@ -19,7 +23,7 @@ export default {
       dispatch({type: FETCH_DOGS_STARTED})
       const dogs = await api.get('/dogs')
       // handle error 
-      dispatch({type: FETCH_DOGS_SUCCES, payload: dogs})
+      dispatch({type: FETCH_DOGS_SUCCESS, payload: dogs})
       return Promise.resolve(true)
     }
   },

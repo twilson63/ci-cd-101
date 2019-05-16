@@ -1,22 +1,41 @@
+<script>
+  import { getContext, onMount } from 'svelte'
+
+  const action = getContext('action')
+
+  let dog = {
+    name: '',
+    breed: '',
+    avatar: ''
+  }
+
+  async function submit() {
+    await action('doPostDog')(dog)
+    action('doUpdateUrl')('/dogs')
+  }
+</script>
 <h1>Add Dog</h1>
 <p>Add your favorite dog to the TRHC Family</p>
 <div class="box">
   <p>Once you have added your dog, feel free to submit your favorite dog pictures to share with the group</p>
 </div>
-<form>
+<form on:submit|preventDefault={submit}>
   <div class="control">
     <label class="label" for="name">Name</label>
-    <input type="text" class="input" id="name" />
+    <input type="text" class="input" id="name" bind:value={dog.name} />
   </div>
   <div class="control">
     <label class="label" for="breed">Breed</label>
     <div class="select">
-      <select>
+      <select bind:value={dog.breed}>
         <option>Select Breed</option>
         <option>Terrier-Russell</option>
       </select>
     </div>
   </div>
+  <div class="control">
+    <label class="label" for="avatar">Avatar</label>
+    <input type="text" class="input" id="avatar" bind:value={dog.avatar} />
   <div>
     <button type="submit" class="button is-primary">Submit</button>
     <a href="/dogs" class="button">Cancel</a>
