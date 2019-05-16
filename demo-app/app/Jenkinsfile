@@ -1,6 +1,6 @@
 pipeline {
-  agent: { docker: { image: 'node:latest' }}
-  stages: {
+  agent { docker: { image: 'node:latest' }}
+  stages {
     stage('setup') {
       steps {
         sh 'npm i yarn -g'
@@ -19,9 +19,12 @@ pipeline {
     stage('deploy') {
       when('master')
       steps {
-        pushToCloudFoundry({
-        
-        })
+       pushToCloudFoundry(
+          target: 'api.run.pivotal.io',
+          organization: 'twilson63',
+          cloudSpace: 'development',
+          credentialsId: 'twilson63-pivotal'
+        ) 
       }
     }
   }

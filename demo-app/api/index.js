@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
 })
 
 if (!module.parent) {
-  app.listen(4000)
+  app.listen(process.env.PORT || 4000)
 }
 
 module.exports = app

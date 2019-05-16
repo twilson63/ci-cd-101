@@ -22,7 +22,8 @@
     "dev": "run-p start:dev autobuild",
     "start": "sirv public",
     "start:dev": "sirv public --dev -s",
-    "css-build": "node-sass --omit-source-map-url sass/styles.scss > public/styles.css"
+    "css-build": "node-sass --omit-source-map-url sass/styles.scss > public/styles.css",
+    "test": "echo OK"
   },
   "dependencies": {
     "ramda": "^0.26.1",
