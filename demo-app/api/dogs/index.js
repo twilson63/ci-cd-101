@@ -1,3 +1,4 @@
+require('isomorphic-fetch')
 const express = require('express')
 
 const bodyParser = require('body-parser')
@@ -12,6 +13,7 @@ app.post('/', bodyParser.json(), async (req, res) => {
 app.get('/', async (req, res) => {
   const results = await list()
   if (results.error) {
+    console.log(results)
     return res.status(500).send({error: results.error})
   }
   res.send(results.docs)

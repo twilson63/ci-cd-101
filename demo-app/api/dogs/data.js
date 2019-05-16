@@ -26,6 +26,7 @@ module.exports = {
 function createApi() {
   return {
     find(query) {
+
       return fetch(db + '/_find', {
         method: 'POST',
         body: JSON.stringify(query),
@@ -34,6 +35,7 @@ function createApi() {
           authorization: `Basic ${token}`
         }
       }).then(r => r.json())
+     
     },
     post(doc) {
       return fetch(db, {

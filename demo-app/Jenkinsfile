@@ -1,0 +1,41 @@
+pipeline {
+  agent { docker { image 'node:latest'}}
+  environment { 
+    HOME = '..' 
+    API = 'https://twilson63-dogs-api.cfapps.io'
+  }
+  stages {
+    stage('setup') {
+      steps {
+        sh 'cd api && npm install'
+        sh 'cd app && npm install'
+      }
+    }
+    stage('build app') {
+      when {
+        changeset "**/app/**/*.*"
+      }
+      steps {
+        sh 'cd app && npm run build'
+      }
+    }
+    stage('test api') {
+      steps {
+        sh 'cd api && npm test'
+      }
+    }
+    stage('deploy') {
+      steps {
+        sh 'rm -rf api/npm-cache'
+        sh 'rm -rf app/.npm'
+        pushToCloudFoundry(
+
+          target: 'api.run.pivotal.io',
+          organization: 'twilson63',
+          cloudSpace: 'development',
+          credentialsId: 'twilson63-pivotal'
+        )
+      }
+    }
+  }
+}

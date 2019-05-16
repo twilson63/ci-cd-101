@@ -1,7 +1,10 @@
 const express = require('express')
 const app = express()
+const cors = require('cors')
 
 const dogs = require('./dogs')
+
+app.use(cors())
 
 app.use('/dogs', dogs)
 
@@ -10,7 +13,7 @@ app.get('/', (req, res) => {
 })
 
 if (!module.parent) {
-  app.listen(3000)
+  app.listen(process.env.PORT || 4000)
 }
 
 module.exports = app

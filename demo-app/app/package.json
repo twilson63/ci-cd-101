@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "devDependencies": {
     "bulma": "^0.7.4",
+    "dotenv": "^8.0.0",
     "node-sass": "^4.12.0",
     "npm-run-all": "^4.1.5",
     "rollup": "^1.10.1",
@@ -21,7 +22,8 @@
     "dev": "run-p start:dev autobuild",
     "start": "sirv public",
     "start:dev": "sirv public --dev -s",
-    "css-build": "node-sass --omit-source-map-url sass/styles.scss > public/styles.css"
+    "css-build": "node-sass --omit-source-map-url sass/styles.scss > public/styles.css",
+    "test": "echo OK"
   },
   "dependencies": {
     "ramda": "^0.26.1",

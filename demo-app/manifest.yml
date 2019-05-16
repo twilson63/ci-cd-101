@@ -1,0 +1,14 @@
+---
+
+  env:
+    DB: https://db.pouchcloud.com/trhc-dogs
+    DB_AUTH: Y2F0Om1lb3c=
+
+  applications:
+    - name: twilson63-dogs-api
+      memory: 64M
+      path: ./api
+    - name: twilson63-trhc-dogs
+      memory: 64M
+      path: ./app
+ 
